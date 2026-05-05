@@ -11,6 +11,7 @@ STAGES = [
     "CRITICAL_CLAUSES_ANALYSED",
     "OPERATOR_REVIEW_COMPLETE",
     "NEGOTIATION_BRIEF_GENERATED",
+    "OPTIONAL_OUTPUTS_GENERATED",
     "VALIDATION_COMPLETE",
     "RESULTS_FINALISED",
 ]
@@ -21,6 +22,7 @@ ARTIFACTS = [
     "risk_analysis.json",
     "operator_overrides.json",
     "negotiation_brief.md",
+    "redlined_contract.md",
     "llm_calls.jsonl",
 ]
 
@@ -111,6 +113,17 @@ def run(fresh: bool = False):
         state = "NEGOTIATION_BRIEF_GENERATED"
     else:
         print("[pipeline] Skipping brief generation (already done).")
+
+    # ── OPTIONAL_OUTPUTS_GENERATED ──────────────────────────────────────────
+    if STAGES.index(state) < STAGES.index("OPTIONAL_OUTPUTS_GENERATED"):
+        from stages.market_compare import run as market_compare
+        market_compare()
+        from stages.redline import run as redline
+        redline()
+        write_state("OPTIONAL_OUTPUTS_GENERATED")
+        state = "OPTIONAL_OUTPUTS_GENERATED"
+    else:
+        print("[pipeline] Skipping optional outputs (already done).")
 
     # ── VALIDATION_COMPLETE ──────────────────────────────────────────────────
     import subprocess

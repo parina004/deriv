@@ -9,6 +9,7 @@ REQUIRED_ARTIFACTS = [
     "risk_analysis.json",
     "operator_overrides.json",
     "negotiation_brief.md",
+    "redlined_contract.md",
     "llm_calls.jsonl",
 ]
 
@@ -175,6 +176,44 @@ if llm_calls:
             ok(f"llm_calls.jsonl has record for '{required_stage}'")
         else:
             fail(f"llm_calls.jsonl missing record for '{required_stage}'")
+
+# ── 12. Market comparison fields on critical/high clauses ─────────────────────
+print("Checking market standard comparison fields...")
+if risk_data and framework_data:
+    target = [c for c in risk_data["clauses"] if c.get("severity") in ("critical", "high")]
+    missing_mc = [c["clause_number"] for c in target if "market_standard_comparison" not in c]
+    if missing_mc:
+        fail(f"Clauses missing market_standard_comparison: {missing_mc}")
+    else:
+        ok(f"All {len(target)} critical/high clauses have market_standard_comparison")
+    missing_basis = [c["clause_number"] for c in target if "basis" not in c]
+    if missing_basis:
+        fail(f"Clauses missing 'basis' field: {missing_basis}")
+    else:
+        ok("All critical/high clauses have 'basis' field")
+
+# ── 13. Redline document exists and has bold replacement text ─────────────────
+print("Checking redlined_contract.md...")
+if Path("redlined_contract.md").exists():
+    redline_text = Path("redlined_contract.md").read_text(encoding="utf-8")
+    if "**" in redline_text:
+        ok("redlined_contract.md contains bold replacement text")
+    else:
+        fail("redlined_contract.md has no bold (**) markers")
+    if "AI-GENERATED" in redline_text or "NOT LEGAL ADVICE" in redline_text:
+        ok("redlined_contract.md contains AI-generated disclaimer")
+    else:
+        fail("redlined_contract.md missing AI-generated disclaimer")
+
+# ── 14. optional_redline_generation records in llm_calls.jsonl ───────────────
+print("Checking optional stage records in llm_calls.jsonl...")
+if llm_calls:
+    stages_present = {r.get("stage") for r in llm_calls}
+    for optional_stage in ["optional_market_comparison", "optional_redline_generation"]:
+        if optional_stage in stages_present:
+            ok(f"llm_calls.jsonl has record for '{optional_stage}'")
+        else:
+            fail(f"llm_calls.jsonl missing record for '{optional_stage}'")
 
 # ── Result ────────────────────────────────────────────────────────────────────
 print("\n" + "=" * 60)

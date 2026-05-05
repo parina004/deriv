@@ -8,7 +8,9 @@
       "risk_category": "unilateral_modification",
       "severity": "high",
       "one_sentence_risk_summary": "Vendor can modify, suspend or discontinue any feature without notice, potentially disrupting Client's business operations.",
-      "is_non_standard": true
+      "is_non_standard": true,
+      "market_standard_comparison": "This clause deviates significantly from market standards by granting Vendor unrestricted rights to modify, suspend, or discontinue any feature without prior notice. Market standard SaaS contracts typically require vendors to provide advance notice (usually 30-90 days) for material changes to functionality, especially for business-critical features. Standard contracts also often distinguish between core and non-core functionality, limiting modification rights for essential features, and may include provisions for refunds or early termination if material functionality is removed. The absence of these protections creates substantial operational risk for the Client.",
+      "basis": "LLM general knowledge, not a sourced legal database"
     },
     {
       "clause_number": "2",
@@ -25,7 +27,9 @@
         "Change payment term from '14 days' to '30 days' to align with standard industry practice",
         "Modify interest provision to '1.5% per month, simple interest (not compounded)' to reflect reasonable market rates",
         "Replace immediate suspension right with 'Vendor may suspend services if payment remains overdue 15 days after written notice of late payment'"
-      ]
+      ],
+      "market_standard_comparison": "This payment clause contains several terms that are significantly more aggressive than market standards. The 14-day payment window is shorter than the typical 30-day term in commercial SaaS contracts. The 4% monthly interest rate compounded daily is extraordinarily punitive, far exceeding market norms of 1-1.5% monthly simple interest. Most concerning is the immediate suspension after just one day of late payment without notice, whereas standard contracts typically provide a 10-30 day cure period with written notice before service suspension. These combined terms create excessive financial exposure and business continuity risk.",
+      "basis": "LLM general knowledge, not a sourced legal database"
     },
     {
       "clause_number": "3",
@@ -42,7 +46,9 @@
         "Replace perpetual license with: 'Vendor may use Client Data solely for the purpose of providing the Services to Client during the Term of this Agreement.'",
         "Add data protection clause: 'Vendor shall not use Client Data to train machine learning models or for any purpose beyond providing the Services without Client's prior written consent, which may be withheld at Client's sole discretion.'",
         "Add termination provision: 'Upon termination of this Agreement, Vendor shall promptly return or destroy all Client Data in its possession and shall certify such return or destruction in writing. Vendor shall retain no copies of Client Data except as required by applicable law, and any such retained data shall remain subject to the confidentiality provisions of this Agreement.'"
-      ]
+      ],
+      "market_standard_comparison": "This data rights clause contains unusually broad vendor permissions that exceed market standards. While acknowledging client data ownership is standard, the perpetual, irrevocable license to use, modify, and distribute client data for product improvement, analytics, and ML training is overly expansive. Market standard contracts typically limit data usage to service provision, anonymized aggregated analytics, and require explicit consent for ML training. The survival of these rights after termination is particularly one-sided. Standard contracts usually require data deletion upon termination or limit ongoing usage to anonymized, aggregated data only with appropriate confidentiality protections.",
+      "basis": "LLM general knowledge, not a sourced legal database"
     },
     {
       "clause_number": "4",
@@ -69,7 +75,9 @@
         "Remove 'gross negligence or wilful misconduct' from the limitation of liability coverage",
         "Increase the liability cap to at least twelve (12) months of fees paid under the Agreement",
         "Add carve-outs for specific high-risk scenarios: 'Notwithstanding the foregoing, the limitations of liability shall not apply to: (i) Vendor's indemnification obligations; (ii) breach of confidentiality obligations; (iii) data security breaches; (iv) intellectual property infringement; or (v) bodily injury or damage to physical property'"
-      ]
+      ],
+      "market_standard_comparison": "This liability clause is significantly more restrictive than market standards in two critical ways. First, the liability cap limited to fees paid in the previous month is extremely low compared to market standards, which typically range from 6-12 months of fees or a fixed amount for enterprise contracts. Second, the extension of liability limitations to gross negligence and willful misconduct is highly unusual and potentially unenforceable in many jurisdictions. Standard contracts typically exclude intentional misconduct, gross negligence, and sometimes data breaches from liability caps, making this clause exceptionally one-sided.",
+      "basis": "LLM general knowledge, not a sourced legal database"
     },
     {
       "clause_number": "6",
@@ -79,7 +87,9 @@
       "risk_category": "ip_ownership",
       "severity": "high",
       "one_sentence_risk_summary": "Vendor retains ownership of all customizations paid for by Client with only a temporary license during the agreement term.",
-      "is_non_standard": true
+      "is_non_standard": true,
+      "market_standard_comparison": "This IP ownership clause deviates substantially from market standards for custom development work. Typically, when a client pays for customizations or integrations, they would receive either ownership of the resulting work or at minimum a perpetual license that survives termination. This clause instead grants Vendor full ownership with only a limited, non-transferable license during the contract term. Market standard contracts would provide clients with perpetual rights to custom work they've funded, especially for integrations specific to their business. The termination of rights to paid customizations upon contract end represents a significant lock-in mechanism not aligned with industry norms.",
+      "basis": "LLM general knowledge, not a sourced legal database"
     },
     {
       "clause_number": "7",
@@ -89,7 +99,9 @@
       "risk_category": "termination_rights",
       "severity": "high",
       "one_sentence_risk_summary": "Short 7-day data export window after termination creates risk of permanent data loss.",
-      "is_non_standard": true
+      "is_non_standard": true,
+      "market_standard_comparison": "This termination clause contains a data retention period that is significantly shorter than market standards. While the 90-day termination notice is fairly standard, the 7-day window for data export is unusually brief compared to market norms of 30-90 days. Enterprise SaaS contracts typically provide more generous timeframes for data migration, often with options for extended transition services. The automatic deletion without further notice also deviates from standards that usually require explicit notification before permanent data removal. This compressed timeline creates substantial operational risk for clients with large or complex data sets.",
+      "basis": "LLM general knowledge, not a sourced legal database"
     },
     {
       "clause_number": "8",
@@ -99,7 +111,9 @@
       "risk_category": "dispute_resolution",
       "severity": "high",
       "one_sentence_risk_summary": "Cayman Islands jurisdiction and mandatory arbitration with equal cost sharing regardless of outcome creates significant barriers to dispute resolution.",
-      "is_non_standard": true
+      "is_non_standard": true,
+      "market_standard_comparison": "This governing law and dispute resolution clause deviates significantly from market standards in two key aspects. First, selecting the Cayman Islands as jurisdiction is unusual and likely disadvantageous to most clients, as standard contracts typically specify a jurisdiction with a logical connection to the parties' places of business. Second, requiring arbitration costs to be shared equally regardless of outcome is one-sided compared to market standards, which typically allow for cost allocation based on the prevailing party. This arrangement could discourage legitimate claims by forcing clients to bear substantial arbitration costs even when they prevail.",
+      "basis": "LLM general knowledge, not a sourced legal database"
     },
     {
       "clause_number": "9",
@@ -109,7 +123,9 @@
       "risk_category": "unilateral_modification",
       "severity": "high",
       "one_sentence_risk_summary": "Vendor can unilaterally modify terms at any time with continued use deemed acceptance, potentially introducing unfavorable terms without explicit consent.",
-      "is_non_standard": true
+      "is_non_standard": true,
+      "market_standard_comparison": "This unilateral modification clause is significantly more one-sided than market standards. Standard SaaS contracts typically require direct notification of material changes (not just website posting) with advance notice periods of 30-90 days. They also commonly include provisions allowing customers to reject material adverse changes or terminate without penalty if changes substantially reduce functionality or increase costs. The deemed acceptance through continued use without explicit acknowledgment is particularly problematic for enterprise clients who may not regularly monitor vendor websites. This clause creates unpredictable contractual terms without appropriate notification mechanisms.",
+      "basis": "LLM general knowledge, not a sourced legal database"
     },
     {
       "clause_number": "10",
@@ -126,7 +142,9 @@
         "Delete 'including claims arising from Vendor's own negligence' and replace with 'except to the extent caused by Vendor's negligence, willful misconduct, or breach of this Agreement.'",
         "Add reciprocal language: 'Vendor shall indemnify, defend, and hold harmless Client from any claims arising from Vendor's negligence, willful misconduct, or breach of this Agreement.'",
         "Add a liability cap: 'Client's total liability under this indemnification shall not exceed the total fees paid to Vendor under this Agreement during the twelve (12) months preceding the claim.'"
-      ]
+      ],
+      "market_standard_comparison": "This indemnification clause is extraordinarily one-sided compared to market standards by requiring Client to indemnify Vendor even for claims arising from Vendor's own negligence. Standard indemnification provisions typically require each party to indemnify for their own negligence or misconduct, not the other party's. Enterprise SaaS contracts normally include mutual indemnification obligations with vendors specifically indemnifying clients against IP infringement claims. Requiring clients to defend vendors against the vendors' own negligence represents a significant deviation from balanced contractual risk allocation and may be unenforceable in some jurisdictions.",
+      "basis": "LLM general knowledge, not a sourced legal database"
     }
   ]
 }
