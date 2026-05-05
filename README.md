@@ -96,12 +96,11 @@ cp .env.example .env
 ```
 
 ```env
-OPENROUTER_API_KEY=your-openrouter-api-key
-LLM_MODEL=anthropic/claude-3.5-sonnet      # any model available on OpenRouter
+#api key
+OPENROUTER_API_KEY=your-key
 
-# Optional — defaults shown
-MAX_TOKENS=4096
-TEMPERATURE=0
+# LLM Model Name
+LLM_MODEL=anthropic/claude-3.7-sonnet
 ```
 
 Get an API key at [openrouter.ai](https://openrouter.ai). The pipeline works with any model available on OpenRouter.
