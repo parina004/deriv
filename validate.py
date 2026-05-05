@@ -10,6 +10,8 @@ REQUIRED_ARTIFACTS = [
     "operator_overrides.json",
     "negotiation_brief.md",
     "redlined_contract.md",
+    "clause_cross_references.json",
+    "signature_risk_score.json",
     "llm_calls.jsonl",
 ]
 
@@ -214,6 +216,51 @@ if llm_calls:
             ok(f"llm_calls.jsonl has record for '{optional_stage}'")
         else:
             fail(f"llm_calls.jsonl missing record for '{optional_stage}'")
+
+# ── 15. Clause cross-references structure ────────────────────────────────────
+print("Checking clause_cross_references.json...")
+cross_data = load_json("clause_cross_references.json") if Path("clause_cross_references.json").exists() else None
+if cross_data:
+    pairs = cross_data.get("cross_references", [])
+    if not pairs:
+        fail("clause_cross_references.json has no cross-reference pairs")
+    else:
+        ok(f"clause_cross_references.json contains {len(pairs)} pair(s)")
+    allowed_severities = {"critical", "high", "medium", "low"}
+    for p in pairs:
+        for field in ["clause_a", "clause_b", "combined_risk_description", "combined_severity"]:
+            if field not in p:
+                fail(f"Cross-reference pair missing field '{field}'")
+        if p.get("combined_severity") not in allowed_severities:
+            fail(f"Invalid combined_severity '{p.get('combined_severity')}' in cross-reference")
+    ok("All cross-reference pairs have required fields and valid severities")
+
+# ── 16. Signature risk score is deterministic and within bounds ───────────────
+print("Checking signature_risk_score.json...")
+sig_data = load_json("signature_risk_score.json") if Path("signature_risk_score.json").exists() else None
+if sig_data:
+    score = sig_data.get("sign_as_is_risk_score")
+    formula = sig_data.get("formula")
+    distribution = sig_data.get("severity_distribution")
+    justification = sig_data.get("justification")
+    if score is None:
+        fail("signature_risk_score.json missing 'sign_as_is_risk_score'")
+    elif not (0 <= score <= 100):
+        fail(f"sign_as_is_risk_score {score} is outside 0-100 range")
+    else:
+        ok(f"sign_as_is_risk_score = {score} (within 0-100)")
+    if formula:
+        ok("signature_risk_score.json contains formula")
+    else:
+        fail("signature_risk_score.json missing 'formula'")
+    if distribution:
+        ok("signature_risk_score.json contains severity_distribution")
+    else:
+        fail("signature_risk_score.json missing 'severity_distribution'")
+    if justification:
+        ok("signature_risk_score.json contains justification paragraph")
+    else:
+        fail("signature_risk_score.json missing 'justification'")
 
 # ── Result ────────────────────────────────────────────────────────────────────
 print("\n" + "=" * 60)

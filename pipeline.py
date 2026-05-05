@@ -23,6 +23,8 @@ ARTIFACTS = [
     "operator_overrides.json",
     "negotiation_brief.md",
     "redlined_contract.md",
+    "clause_cross_references.json",
+    "signature_risk_score.json",
     "llm_calls.jsonl",
 ]
 
@@ -120,6 +122,10 @@ def run(fresh: bool = False):
         market_compare()
         from stages.redline import run as redline
         redline()
+        from stages.cross_reference import run as cross_reference
+        cross_reference()
+        from stages.signature_score import run as signature_score
+        signature_score()
         write_state("OPTIONAL_OUTPUTS_GENERATED")
         state = "OPTIONAL_OUTPUTS_GENERATED"
     else:
